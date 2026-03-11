@@ -433,7 +433,8 @@ class TestPolicy:
 
     def test_routing_profile_eco(self):
         from app.policy import ROUTING_PROFILES
-        assert ROUTING_PROFILES["eco"].get("force_free") is True
+        assert ROUTING_PROFILES["eco"]["chain_limit"] == 2
+        assert ROUTING_PROFILES["eco"]["force_complex"] is False
 
     def test_routing_profile_reasoning(self):
         from app.policy import ROUTING_PROFILES
