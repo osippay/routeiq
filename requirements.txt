@@ -1,0 +1,20 @@
+# Core
+requests>=2.31.0
+pyyaml>=6.0
+uvicorn>=0.27.0
+fastapi>=0.109.0
+rich>=13.0.0
+
+# Optional — ML classifier (falls back to keyword heuristics if missing)
+# sentence-transformers>=2.2.0
+
+# Optional — direct Google GenAI SDK
+# google-genai>=1.0.0
+
+# Optional — OpenTelemetry tracing
+# opentelemetry-api>=1.20.0
+# opentelemetry-sdk>=1.20.0
+# opentelemetry-exporter-otlp>=1.20.0
+
+# Dev / test
+pytest>=7.0

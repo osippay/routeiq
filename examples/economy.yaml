@@ -1,0 +1,90 @@
+# ──────────────────────────────────────────────
+# RouteIQ — Economy Configuration
+#
+# Only free and ultra-cheap models.
+# Great for development, testing, and prototyping.
+# Expected cost: ~$0/day (mostly free models)
+# ──────────────────────────────────────────────
+
+task_chains:
+  text:       [llama_local, llama_groq, gemini_flash]
+  code:       [qwen_coder, llama_local, llama_groq]
+  summarize:  [gemini_flash, llama_local]
+  think:      [llama_groq, gemini_flash]
+  strategy:   [llama_groq, gemini_flash]
+  vision:     [gemini_flash]
+  image:      [dall_e_3]
+  audio:      [whisper]
+
+models:
+  qwen_coder:
+    id: qwen/qwen-2.5-coder-32b-instruct
+    priority: 90
+    free: true
+    cost_per_1k_input: 0.0
+    cost_per_1k_output: 0.0
+    context_length: 32768
+    capabilities: [code]
+
+  gemini_flash:
+    id: google/gemini-2.5-flash-lite
+    priority: 65
+    free: false
+    cost_per_1k_input: 0.000075
+    cost_per_1k_output: 0.0003
+    context_length: 1048576
+    capabilities: [text, vision, summarize]
+
+  llama_groq:
+    id: meta-llama/llama-3.3-70b-instruct
+    priority: 55
+    free: false
+    cost_per_1k_input: 0.0001
+    cost_per_1k_output: 0.00032
+    context_length: 131072
+    capabilities: [text, code, summarize]
+
+  llama_local:
+    id: ollama/llama3.1:8b
+    provider: ollama
+    priority: 40
+    free: true
+    cost_per_1k_input: 0.0
+    cost_per_1k_output: 0.0
+    context_length: 131072
+    capabilities: [text, code, summarize]
+    note: "Requires Ollama running locally"
+
+  dall_e_3:
+    id: openai/dall-e-3
+    priority: 100
+    free: false
+    cost_per_image: 0.04
+    context_length: 4096
+    capabilities: [image]
+
+  whisper:
+    id: openai/whisper-1
+    priority: 100
+    free: false
+    cost_per_minute: 0.006
+    context_length: 0
+    capabilities: [audio]
+
+budget:
+  starting_balance_usd: 10.0
+  warn_at_pct: 50
+  critical_at_pct: 80
+  stop_at_pct: 98
+  daily_limit_usd: 1.0
+  monthly_limit_usd: 10.0
+
+weights:
+  cost_weight: 0.7      # heavily favor cheap models
+  quality_weight: 0.2
+  latency_weight: 0.1
+
+cache:
+  enabled: true
+  max_size: 512          # larger cache = more savings
+  ttl_seconds: 7200      # 2 hours

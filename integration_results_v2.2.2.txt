@@ -1,0 +1,55 @@
+============================================================
+RouteIQ — Integration Tests (real API calls)
+============================================================
+
+  Key: sk-or-v1-578...c4c0
+  Verbose: True
+
+  Balance before: $98.0773
+
+── Test 1: Simple text prompt ──
+  ✅ Text → gemini_flash  ($0.00000, 2845ms, 6 tokens)
+     → Response: Hello, there, friend.
+
+── Test 2: Code prompt ──
+  ✅ Code → qwen_coder  ($0.00006, 5037ms, task=code)
+     → Response: Certainly! Here's a concise Python function to calculate the factorial of a numb
+
+── Test 3: Summarize prompt ──
+  ✅ Summarize → gpt4o_mini  ($0.00002, task=summarize)
+     → Response: Python, created by Guido van Rossum and released in 1991, is a high-level progra
+
+── Test 4: Response caching ──
+  ✅ Cache hit  (First: $0.00002, Second: $0.00000 (cached))
+
+── Test 5: Session persistence ──
+  ✅ Session pinned to gemini_flash  (2 turns, same model)
+
+── Test 6: Classifier edge cases ──
+  ✅ classify(yo fix that thing with the thingamajig in mai...) → code
+  ✅ classify(make this component responsive...) → code
+  ✅ classify(what does this error mean: TypeError: cannot ...) → code
+  ✅ classify(can you explain quantum entanglement simply...) → text
+  ✅ classify(TL;DR this whole thing...) → summarize
+
+── Test 7: Budget tracking ──
+  ✅ Budget tracked: $0.00010 spent  (Balance: $98.0772)
+
+── Test 8: Streaming ──
+  ✅ Streaming: 215 chunks  (1106 chars total)
+     → Response: The sky appears blue due to a phenomenon called Rayleigh scattering, which is th
+
+── Test 9: Routing profile ──
+  ✅ Profile 'eco' → llama_groq  ($0.00001)
+
+── Test 10: Model alias ──
+  ✅ Alias 'flash' → gemini_flash  ($0.00001)
+
+── Test 11: Report generation ──
+  ✅ Report: 109 requests, $1.92295
+
+============================================================
+Results: 15 passed, 0 failed
+Total API cost: $0.00020
+Balance remaining: $98.0771
+============================================================

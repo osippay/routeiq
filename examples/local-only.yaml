@@ -1,0 +1,72 @@
+# ──────────────────────────────────────────────
+# RouteIQ — Local-Only Configuration
+#
+# 100% local via Ollama. No API keys needed.
+# Zero cost, full privacy, works offline.
+#
+# Prerequisites:
+#   1. Install Ollama: https://ollama.com
+#   2. Pull models:
+#      ollama pull llama3.1:8b
+#      ollama pull deepseek-coder:6.7b
+#      ollama pull llava:7b
+# ──────────────────────────────────────────────
+
+task_chains:
+  text:       [llama_local]
+  code:       [deepseek_local, llama_local]
+  summarize:  [llama_local]
+  think:      [llama_local]
+  strategy:   [llama_local]
+  vision:     [llava_local]
+  image:      []           # no local image generation
+  audio:      []           # no local transcription
+
+models:
+  llama_local:
+    id: ollama/llama3.1:8b
+    provider: ollama
+    priority: 70
+    free: true
+    cost_per_1k_input: 0.0
+    cost_per_1k_output: 0.0
+    context_length: 131072
+    capabilities: [text, code, summarize, think, strategy]
+
+  deepseek_local:
+    id: ollama/deepseek-coder:6.7b
+    provider: ollama
+    priority: 85
+    free: true
+    cost_per_1k_input: 0.0
+    cost_per_1k_output: 0.0
+    context_length: 16384
+    capabilities: [code]
+
+  llava_local:
+    id: ollama/llava:7b
+    provider: ollama
+    priority: 60
+    free: true
+    cost_per_1k_input: 0.0
+    cost_per_1k_output: 0.0
+    context_length: 4096
+    capabilities: [vision]
+
+budget:
+  starting_balance_usd: 0.0    # everything is free
+  warn_at_pct: 100
+  critical_at_pct: 100
+  stop_at_pct: 100
+  daily_limit_usd: 0
+  monthly_limit_usd: 0
+
+aliases:
+  llama: llama_local
+  coder: deepseek_local
+  vision: llava_local
+
+cache:
+  enabled: true
+  max_size: 512
+  ttl_seconds: 86400     # 24h — local is fast anyway

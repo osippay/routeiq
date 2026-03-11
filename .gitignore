@@ -1,0 +1,39 @@
+# Environment & secrets
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# State (generated at runtime)
+state/*.json
+state/*.jsonl
+state/*.old
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Test / coverage
+.pytest_cache/
+htmlcov/
+.coverage

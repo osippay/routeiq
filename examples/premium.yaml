@@ -1,0 +1,95 @@
+# ──────────────────────────────────────────────
+# RouteIQ — Premium Configuration
+#
+# Best quality models first. Cost is secondary.
+# For production workloads where accuracy matters.
+# Expected cost: $5-20/day depending on volume
+# ──────────────────────────────────────────────
+
+task_chains:
+  text:       [sonnet, gpt4o_mini, gemini_flash]
+  code:       [sonnet, opus, qwen_coder]
+  summarize:  [sonnet, gemini_flash]
+  think:      [opus, sonnet]
+  strategy:   [opus, sonnet]
+  vision:     [sonnet, gpt4o_mini]
+  image:      [dall_e_3]
+  audio:      [whisper]
+
+models:
+  opus:
+    id: anthropic/claude-opus-4-6
+    priority: 100
+    free: false
+    cost_per_1k_input: 0.015
+    cost_per_1k_output: 0.075
+    context_length: 200000
+    capabilities: [text, code, vision, think, strategy]
+
+  sonnet:
+    id: anthropic/claude-sonnet-4-5
+    priority: 85
+    free: false
+    cost_per_1k_input: 0.003
+    cost_per_1k_output: 0.015
+    context_length: 200000
+    capabilities: [text, code, vision, think]
+
+  gpt4o_mini:
+    id: openai/gpt-4o-mini
+    priority: 70
+    free: false
+    cost_per_1k_input: 0.00015
+    cost_per_1k_output: 0.0006
+    context_length: 128000
+    capabilities: [text, vision]
+
+  gemini_flash:
+    id: google/gemini-2.5-flash-lite
+    priority: 65
+    free: false
+    cost_per_1k_input: 0.000075
+    cost_per_1k_output: 0.0003
+    context_length: 1048576
+    capabilities: [text, vision, summarize]
+
+  qwen_coder:
+    id: qwen/qwen-2.5-coder-32b-instruct
+    priority: 90
+    free: true
+    context_length: 32768
+    capabilities: [code]
+
+  dall_e_3:
+    id: openai/dall-e-3
+    priority: 100
+    free: false
+    cost_per_image: 0.04
+    context_length: 4096
+    capabilities: [image]
+
+  whisper:
+    id: openai/whisper-1
+    priority: 100
+    free: false
+    cost_per_minute: 0.006
+    context_length: 0
+    capabilities: [audio]
+
+budget:
+  starting_balance_usd: 500.0
+  warn_at_pct: 50
+  critical_at_pct: 80
+  stop_at_pct: 98
+  daily_limit_usd: 25.0
+  monthly_limit_usd: 500.0
+
+weights:
+  cost_weight: 0.2
+  quality_weight: 0.6    # heavily favor quality
+  latency_weight: 0.2
+
+cache:
+  enabled: true
+  max_size: 256
+  ttl_seconds: 1800      # 30 min — fresher responses
