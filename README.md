@@ -233,29 +233,37 @@ routeiq dashboard
 ```
 
 ```
- ╭─────────────────────────────────────╮
- │  ⚡  R O U T E  I Q   v2.3        │
- │     Smart LLM Router               │
- ╰─────────────────────────────────────╯
+⚡ RouteIQ v2.4.0 — Smart LLM Router
+0h 14m 37s  │  Ctrl+C to quit
+────────────────────────────────────────────────
 
- ╭─── ⚡ Stats ──────────────────╮  ╭─── 📊 Routing Distribution ────╮
- │ Total Requests        247     │  │ code       144  ████████  58%  │
- │ Req/min (5m)          3.2     │  │ text        71  ████     29%  │
- │ Actual Cost       $1.7373     │  │ summarize   32  ██       13%  │
- │ Without Routing   $3.0270     │  │ think        7  ▌         3%  │
- │ Saved      $1.2897 (42.6%)    │  │ vision       6  ▌         2%  │
- │ Balance           $98.26      │  ╰────────────────────────────────╯
- ╰───────────────────────────────╯
- ╭─── 📋 Recent Requests ─────────────────────────────────────────────╮
- │ Time      Task        Model           Latency  Tokens     Cost    │
- │ 01:22:55  code        qwen_coder        180ms     423  $0.00000  │
- │ 01:20:12  text        gemini_flash       95ms     286  $0.00002  │
- │ 01:18:44  think       opus             1209ms    5242  $0.12340  │
- │ 01:15:33  summarize   gemini_flash      135ms    2150  $0.00034  │
- ╰─────────────────────────────────────────────────────────────────────╯
+┌── ⚡ Stats ───────────────────────────────────┐
+│  Total Requests                          247  │
+│  Req/min (5m)                            3.2  │
+│  Actual Cost                        $1.7373   │
+│  Without Routing                    $3.0270   │
+│  Saved                     $1.2897 (42.6%)    │
+│  Balance                           $98.26     │
+└───────────────────────────────────────────────┘
+
+┌── 📊 Routing Distribution ────────────────────┐
+│  code        144  ████████████░░░░░░░  58.3%  │
+│  text         71  █████░░░░░░░░░░░░░░  28.7%  │
+│  summarize    32  ██░░░░░░░░░░░░░░░░░  13.0%  │
+│  think         7  █░░░░░░░░░░░░░░░░░░   2.8%  │
+│  vision        6  █░░░░░░░░░░░░░░░░░░   2.4%  │
+└───────────────────────────────────────────────┘
+
+┌── 📋 Recent Requests ────────────────────────────────────────────┐
+│  Time      Task        Model           Latency  Tokens     Cost  │
+│  01:22:55  code        qwen_coder        180ms     423  $0.000  │
+│  01:20:12  text        gemini_flash       95ms     286  $0.000  │
+│  01:18:44  think       opus             1209ms    5242  $0.123  │
+│  01:15:33  summarize   gemini_flash      135ms    2150  $0.000  │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
-Built with [Rich](https://github.com/Textualize/rich) — no curses, proper Unicode rendering, works on macOS/Linux/Windows.
+Built with [Rich](https://github.com/Textualize/rich) — proper Unicode rendering, auto-adapts to terminal width, works on macOS/Linux/Windows.
 
 ### Analytics Report
 
@@ -398,7 +406,7 @@ routeiq/
 │   ├── cache.py           # LRU response cache
 │   ├── session.py         # session persistence
 │   ├── analytics.py       # report generation from logs
-│   ├── dashboard.py       # live terminal dashboard (curses TUI)
+│   ├── dashboard.py       # live terminal dashboard (Rich)
 │   ├── alerts.py          # multi-channel alert dispatcher
 │   ├── doctor.py          # health checks and diagnostics (routeiq doctor)
 │   ├── storage.py         # atomic file operations

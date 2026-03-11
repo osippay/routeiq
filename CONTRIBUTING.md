@@ -67,7 +67,7 @@ routeiq/
 │   ├── cache.py         # LRU response cache
 │   ├── session.py       # Session persistence (model pinning)
 │   ├── analytics.py     # Report generation from logs
-│   ├── dashboard.py     # Live terminal dashboard (curses TUI)
+│   ├── dashboard.py     # Live terminal dashboard (Rich)
 │   ├── alerts.py        # Alert dispatcher (Telegram, Slack, email, webhook)
 │   ├── doctor.py        # Health checks and diagnostics
 │   ├── storage.py       # Atomic file operations

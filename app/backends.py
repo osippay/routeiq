@@ -79,7 +79,7 @@ class OpenRouterBackend(LLMBackend):
         return {
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://github.com/routeiq",
+            "HTTP-Referer": "https://github.com/osippos/routeiq",
             "X-Title": "RouteIQ",
         }
 
